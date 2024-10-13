@@ -6,3 +6,18 @@ compatibility_flags = ["nodejs_compat"]
 
 [observability]
 enabled = true
+
+[env.prod]
+workers_dev = true
+vars = { ENV_KIND = "prod" }
+
+[env.stg]
+workers_dev = true
+vars = { ENV_KIND = "stg" }
+d1_databases = [
+    { binding = "DB", database_name = "build-cabinet-stg", database_id = "7318cc94-70ee-46ae-bfcb-6cc164cb0146" },
+]
+
+[env.local]
+workers_dev = false
+vars = { ENV_KIND = "local" }

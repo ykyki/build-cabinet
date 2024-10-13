@@ -3,10 +3,10 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "deploy": "wrangler deploy",
-        "dev": "wrangler dev",
-        "build": "wrangler deploy --dry-run --outdir=dist",
-        "start": "wrangler dev",
+        "deploy-stg": "wrangler deploy --env stg",
+        "deploy-prod": "wrangler deploy --env prod",
+        "dev": "wrangler dev --env local",
+        "build": "wrangler deploy --env prod --dry-run --outdir=dist",
         "test": "vitest",
         "cf-typegen": "wrangler types"
     },
