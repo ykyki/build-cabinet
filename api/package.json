@@ -3,9 +3,9 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "deploy-stg": "wrangler deploy --env stg",
+        "deploy-dev": "wrangler deploy --env dev",
         "deploy-prod": "wrangler deploy --env prod",
-        "dev": "wrangler dev --env local",
+        "dev": "wrangler dev --env dev",
         "build": "wrangler deploy --env prod --dry-run --outdir=dist",
         "test": "vitest",
         "cf-typegen": "wrangler types"

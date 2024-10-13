@@ -10,14 +10,13 @@ enabled = true
 [env.prod]
 workers_dev = true
 vars = { ENV_KIND = "prod" }
-
-[env.stg]
-workers_dev = true
-vars = { ENV_KIND = "stg" }
 d1_databases = [
-    { binding = "DB", database_name = "build-cabinet-stg", database_id = "7318cc94-70ee-46ae-bfcb-6cc164cb0146" },
+    { binding = "DB", database_name = "build-cabinet-prod", database_id = "59f37c9d-ed22-4895-8151-a9c412ef67fe" },
 ]
 
-[env.local]
-workers_dev = false
-vars = { ENV_KIND = "local" }
+[env.dev]
+workers_dev = true
+vars = { ENV_KIND = "dev" }
+d1_databases = [
+    { binding = "DB", database_name = "build-cabinet-dev", database_id = "6a9925ff-45d3-4fbe-9544-508b09adeb89" },
+]
