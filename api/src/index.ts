@@ -1,6 +1,8 @@
 import { format } from 'date-fns';
 import { Hono } from 'hono';
+import { bearerAuth } from 'hono/bearer-auth';
 import { createFactory } from 'hono/factory';
+import { sha256 } from 'hono/utils/crypto';
 
 type Bindings = {
     ENV_KIND: 'prod' | 'dev';
@@ -57,6 +59,23 @@ const app = new Hono<Env>();
 app.use(setRequestId);
 app.use(setLogger);
 app.use(logEnds);
+app.use(
+    bearerAuth({
+        verifyToken: async (token, c) => {
+            c.var.logger(`verify token: ${token}`);
+
+            const statement = c.env.DB.prepare('SELECT * FROM authorization');
+
+            const row = await statement.first(); // TODO handle any type
+            const expectedHash = row.hashed_token; // TODO handle any type
+            const salt = row.salt; // TODO handle any type
+
+            const actualHash = await sha256(`${token}:${salt}`);
+
+            return expectedHash === actualHash;
+        },
+    }),
+);
 
 app.get('/', async (c) => {
     return c.text('Hello World!');
