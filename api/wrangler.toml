@@ -4,19 +4,16 @@ main = "src/index.ts"
 compatibility_date = "2024-10-04"
 compatibility_flags = ["nodejs_compat"]
 
-[observability]
-enabled = true
+observability.enabled = true
+
+vars = { ENV_KIND = "dev" }
+d1_databases = [
+    { binding = "DB", database_name = "build-cabinet-dev", database_id = "6a9925ff-45d3-4fbe-9544-508b09adeb89" },
+]
 
 [env.prod]
 workers_dev = true
 vars = { ENV_KIND = "prod" }
 d1_databases = [
     { binding = "DB", database_name = "build-cabinet-prod", database_id = "59f37c9d-ed22-4895-8151-a9c412ef67fe" },
-]
-
-[env.dev]
-workers_dev = true
-vars = { ENV_KIND = "dev" }
-d1_databases = [
-    { binding = "DB", database_name = "build-cabinet-dev", database_id = "6a9925ff-45d3-4fbe-9544-508b09adeb89" },
 ]
